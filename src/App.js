@@ -27,13 +27,7 @@ function App() {
     <div>
       <h2>Let's get started!</h2>
       {expenses.map((i) => {
-        return (
-          <ExpenseItem
-            title={i.title}
-            cost={i.amount}
-            date={i.date.toISOString()}
-          />
-        );
+        return <ExpenseItem title={i.title} cost={i.amount} date={i.date} />;
       })}
     </div>
   );
