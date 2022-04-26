@@ -5,7 +5,7 @@ import ExpensesFilter from "./ExpensesFilter";
 import "./Expenses.css";
 
 const Expenses = (props) => {
-  const [selectedFilterYear, setSelectedFilterYear] = useState("2020");
+  const [selectedFilterYear, setSelectedFilterYear] = useState("All");
 
   const listenToYear = (selectedYear) => {
     setSelectedFilterYear(selectedYear);
@@ -13,11 +13,27 @@ const Expenses = (props) => {
 
   const filteredItems = props.items.filter((item) => {
     if (selectedFilterYear === "All") {
+      //checks if all selected, renders all by default
       return item;
     } else {
+      //filters by selected year
       return item.date.getFullYear().toString() === selectedFilterYear;
     }
   });
+
+  // conditional rendering of results
+  let expensesContent = <p>No expenses found.</p>;
+
+  if (filteredItems.length > 0) {
+    expensesContent = filteredItems.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        cost={expense.amount}
+        date={expense.date}
+      />
+    ));
+  }
 
   return (
     <div>
@@ -26,14 +42,7 @@ const Expenses = (props) => {
           selected={selectedFilterYear}
           liftSelectedYear={listenToYear}
         />
-        {filteredItems.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            cost={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        {expensesContent}
       </Card>
     </div>
   );
