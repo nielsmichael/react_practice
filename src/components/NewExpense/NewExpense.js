@@ -3,7 +3,7 @@ import ExpenseForm from "./ExpenseForm";
 import "./NewExpense.css";
 
 const NewExpense = (props) => {
-  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [isDisplayed, setIsDisplayed] = useState(false); // useState to control form display
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData,
@@ -13,25 +13,25 @@ const NewExpense = (props) => {
   };
 
   const resetState = () => {
+    //called when 'cancel' button is clicked
     setIsDisplayed(false);
   };
 
-  if (isDisplayed === false) {
-    return (
-      <div className="new-expense">
-        <button onClick={() => setIsDisplayed(true)}>Add Expense</button>
-      </div>
-    );
-  }
-
   return (
     <div className="new-expense">
-      <ExpenseForm
-        cancel={resetState}
-        onSaveExpenseData={
-          saveExpenseDataHandler //points to handler function, does not execute unless this props is activated in the child component
-        }
-      />
+      {!isDisplayed && (
+        <button onClick={() => setIsDisplayed(true)}>Add Expense</button>
+      )}
+      {isDisplayed && (
+        <ExpenseForm
+          cancel={
+            resetState //calls reset
+          }
+          onSaveExpenseData={
+            saveExpenseDataHandler //points to handler function, does not execute unless this props is activated in the child component
+          }
+        />
+      )}
     </div>
   );
 };
