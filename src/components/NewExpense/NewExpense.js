@@ -10,6 +10,11 @@ const NewExpense = (props) => {
       id: Math.random().toString(), // bad practice to use math.random but will suffice for now
     };
     props.onAddExpense(expenseData);
+    setIsDisplayed(false);
+  };
+
+  const updateState = () => {
+    setIsDisplayed(true);
   };
 
   const resetState = () => {
@@ -19,9 +24,7 @@ const NewExpense = (props) => {
 
   return (
     <div className="new-expense">
-      {!isDisplayed && (
-        <button onClick={() => setIsDisplayed(true)}>Add Expense</button>
-      )}
+      {!isDisplayed && <button onClick={updateState}>Add Expense</button>}
       {isDisplayed && (
         <ExpenseForm
           cancel={
