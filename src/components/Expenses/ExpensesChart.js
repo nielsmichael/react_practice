@@ -17,7 +17,7 @@ const ExpensesChart = (props) => {
     { label: "Dec", val: 0 },
   ];
 
-  for (const expense in props.expenses) {
+  for (const expense of props.expenses) {
     // Loop through and look at existing expenses in props.expenses
     const expenseMonth = expense.date.getMonth(); // starting at index 0 => January => 0
     chartDatapoints[expenseMonth].val += expense.amount; // Increase value of a given month by that expense amount
@@ -26,7 +26,7 @@ const ExpensesChart = (props) => {
     <Chart
       dataPoints={
         // Pass the datapoints array to the chart:
-        (datapoints = { chartDatapoints })
+        chartDatapoints
       }
     />
   );
