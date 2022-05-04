@@ -6,7 +6,7 @@ import ExpensesChart from "./ExpensesChart";
 import "./Expenses.css";
 
 const Expenses = (props) => {
-  const [selectedFilterYear, setSelectedFilterYear] = useState("All");
+  const [selectedFilterYear, setSelectedFilterYear] = useState("2020");
 
   const listenToYear = (selectedYear) => {
     setSelectedFilterYear(selectedYear);
